@@ -1,0 +1,2 @@
+airtable-python-wrapper
+requests
