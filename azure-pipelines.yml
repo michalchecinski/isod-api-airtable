@@ -41,7 +41,9 @@ stages:
           inputs:
             sshEndpoint: 'ssh-pi'
             sourceFolder: '.'
-            contents: '** \n !.git/**'
+            contents: |
+              **
+              !.git/**
             targetFolder: '/home/pi/isod-api-airtable'
             readyTimeout: '20000'
         - task: SSH@0
