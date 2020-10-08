@@ -31,7 +31,8 @@ def get_isod_api_news(config):
 
 
 def add_to_airtable(airtable, notification):
-    airtable.insert({'hash': notification['hash'],
+    airtable.insert({
+        'hash': notification['hash'],
         'subject': notification['subject'],
         'content': notification['content'],
         'modifiedDate': notification['modifiedDate'],
@@ -41,9 +42,8 @@ def add_to_airtable(airtable, notification):
     })
 
 
-if __name__=='__main__':
-
-    print(f'Running script at: {datetime.datetime}')
+if __name__ == '__main__':
+    print(f'Running script at: {datetime.datetime.utcnow}')
 
     config = get_config()
 
