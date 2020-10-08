@@ -16,7 +16,7 @@ RUN chmod 0644 /etc/cron.d/cronpy
 
 COPY requirements.txt /app/requirements.txt
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN pip install --upgrade -r requirements.txt
 
 COPY . /app
 
