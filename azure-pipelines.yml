@@ -1,0 +1,45 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - feature/*
+
+stages:
+  - stage: CodeCheck
+    displayName: Code check
+    jobs:
+      - job: Dockercompose
+        steps:
+          - script: sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            displayName: 'Install docker-compose'
+          - script: docker-compose config
+            displayName: 'Validate docker-compose'
+      - job: Python
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+              addToPath: true
+              architecture: 'x64'
+            displayName: 'Use python 3.x'
+          - script: pip install --upgrade pip flake8 mypy typed_ast
+            displayName: 'Install python validation tools'
+          - script: flake8 ./src
+            displayName: 'Validate flake8'
+          - script: mypy --ignore-missing-imports ./src
+            displayName: 'Validate my-py'
+  - stage:
+    displayName: Deployment
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    dependsOn:
+      - CodeCheck
+    jobs:
+      - job: Deployment
+        steps:
+        - task: SSH@0
+          displayName: 'Run shell inline on remote machine'
+          inputs:
+            sshEndpoint: 'ssh-pi'
+            runOptions: inline
+            inline: 'cd /home/pi/isod-api-airtable && docker-compose up --build -d'
