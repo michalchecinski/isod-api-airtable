@@ -37,6 +37,13 @@ stages:
     jobs:
       - job: Deployment
         steps:
+        - task: CopyFilesOverSSH@0
+          inputs:
+            sshEndpoint: 'ssh-pi'
+            sourceFolder: '.'
+            contents: '**'
+            targetFolder: '/home/pi/isod-api-airtable'
+            readyTimeout: '20000'
         - task: SSH@0
           displayName: 'Run docker-compose up on remote machine'
           inputs:
