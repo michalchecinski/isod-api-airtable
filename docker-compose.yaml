@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  isod-api-airtable:
+    container_name: isod-api-airtable
+    restart: always
+    build: .
+    volumes:
+      - ./secrets.json:/app/secrets.json
