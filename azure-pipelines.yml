@@ -38,7 +38,7 @@ stages:
       - job: Deployment
         steps:
         - task: SSH@0
-          displayName: 'Run shell inline on remote machine'
+          displayName: 'Run docker-compose up on remote machine'
           inputs:
             sshEndpoint: 'ssh-pi'
             runOptions: inline
