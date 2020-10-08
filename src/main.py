@@ -1,7 +1,6 @@
 #!/usr/local/bin/python
 
 import datetime
-import os
 from airtable import Airtable
 import requests
 import json
@@ -22,7 +21,9 @@ def get_airtable_connection(config):
 
 def get_isod_api_news(config):
     isod_key = config['isod-key']
-    isod_api = f'https://isod.ee.pw.edu.pl/isod-portal/wapi?q=mynewsfull&username=checinsm&apikey={isod_key}&from=0&to=5'
+    isod_api = 'https://isod.ee.pw.edu.pl/isod-portal'\
+               '/wapi?q=mynewsfull&username=checinsm'\
+               f'&apikey={isod_key}&from=0&to=5'
 
     response = requests.get(isod_api)
 
@@ -31,12 +32,12 @@ def get_isod_api_news(config):
 
 def add_to_airtable(airtable, notification):
     airtable.insert({'hash': notification['hash'],
-    'subject': notification['subject'],
-    'content': notification['content'],
-    'modifiedDate': notification['modifiedDate'],
-    'modifiedBy': notification['modifiedBy'],
-    'noAttachments': notification['noAttachments'],
-    'type': notification['type']
+        'subject': notification['subject'],
+        'content': notification['content'],
+        'modifiedDate': notification['modifiedDate'],
+        'modifiedBy': notification['modifiedBy'],
+        'noAttachments': notification['noAttachments'],
+        'type': notification['type']
     })
 
 
