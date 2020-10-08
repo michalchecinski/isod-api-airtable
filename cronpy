@@ -1,1 +1,1 @@
-* * * * * root /app/src/main.py >> /var/log/task.log 2>&1
+*/5 * * * * root /app/src/main.py >> /var/log/cron.log 2>&1
