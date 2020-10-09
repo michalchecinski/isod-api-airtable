@@ -20,5 +20,6 @@ RUN pip install --upgrade -r requirements.txt
 
 COPY . /app
 
-# Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
+RUN chmod 0744 /app/src/main.py
+
+CMD ["cron", "-f"]
