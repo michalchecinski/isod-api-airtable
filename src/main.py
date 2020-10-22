@@ -13,7 +13,7 @@ def get_config():
 
 def get_airtable_connection(config):
     base_key = 'apphKOOtsf80PN0Cb'
-    table_name = 'Table 1'
+    table_name = 'Notifications'
     airtable_key = config['airtable-key']
     airtable = Airtable(base_key, table_name, api_key=airtable_key)
     return airtable
