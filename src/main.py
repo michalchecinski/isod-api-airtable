@@ -53,6 +53,7 @@ if __name__ == '__main__':
     airtable = get_airtable_connection(config)
 
     for notification in notification_list:
-        records = airtable.search('hash', notification['hash'])
-        if len(records) == 0:
-            add_to_airtable(airtable, notification)
+        if not notification['hash'].startswith('CLASSESANNOUN'):
+            records = airtable.search('hash', notification['hash'])
+            if len(records) == 0:
+                add_to_airtable(airtable, notification)
