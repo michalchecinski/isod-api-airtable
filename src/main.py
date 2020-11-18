@@ -43,7 +43,7 @@ def add_to_airtable(airtable, notification):
 
 
 if __name__ == '__main__':
-    print(f'Running script at: {datetime.datetime.utcnow}')
+    print(f'Running script at: {datetime.datetime.utcnow()}')
 
     config = get_config()
 
