@@ -2,6 +2,8 @@ FROM python:3.6.8-slim
 
 ENV TZ=Europe/Warsaw
 
+ENV PYTHONUNBUFFERED=0
+
 RUN apt-get update \
     && apt-get install -y cron
 
